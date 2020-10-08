@@ -1,5 +1,5 @@
-## Available Scripts
+# This project is under construction, more to come soon™.
 
-This project is under construction, more to come soon™.
-
-### To run:  `npm start`
+## To run:
+- `npm i`
+- `npm start`
