@@ -1,5 +1,11 @@
 # This project is under construction, more to come soon™.
 
-## To run:
+### Start API
+- `cd api`
+- `npm i`
+- `npm start`
+
+### Start Client
+- `cd client`
 - `npm i`
 - `npm start`
