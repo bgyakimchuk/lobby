@@ -6,15 +6,50 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', (socket) => {
-  io.emit('chat message', 'A user has connected.');
+var numUsers = 0;
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+io.on('connection', (socket) => {
+  var addedUser = false;
+
+  socket.on('add user', (username) => {
+    if (addedUser) return;
+
+    console.log(`add user - ${username && username}`)
+
+    socket.username = username;
+    numUsers += 1;
+    addedUser = true;
+
+    socket.emit('new user', {
+      numUsers: numUsers
+    });
+
+    socket.broadcast.emit(`user joined`, {
+      username: socket.username,
+      numUsers: numUsers
+    });
+  });
+
+  socket.on('new message', (message) => {
+    console.log(`new message - ${socket.username}: ${message}`)
+
+    socket.broadcast.emit('new message', {
+      username: socket.username,
+      message
+    });
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    if (!addedUser) return;
+
+    console.log(`disconnect - ${socket.username}`)
+
+    numUsers -= 1;
+
+    socket.broadcast.emit('user left', {
+      username: socket.username,
+      numUsers: numUsers
+    });
   });
 });
 
