@@ -1,14 +1,27 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import Lobby from './pages/Lobby'
+import MainMenu from './pages/MainMenu'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        lobby
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    <Router>
+      <Switch>
+        <Route path="/lobby">
+          <Lobby />
+        </Route>
+        <Route path="/">
+          <MainMenu />
+        </Route>
+      </Switch>
+    </Router>
+  </div>
+);
 
 export default App;
