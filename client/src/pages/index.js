@@ -1,4 +1,4 @@
-import Lobby from './Lobby'
-import MainMenu from './MainMenu'
+import Lobby from './Lobby';
+import MainMenu from './MainMenu';
 
-export { Lobby, MainMenu }
+export { Lobby, MainMenu };

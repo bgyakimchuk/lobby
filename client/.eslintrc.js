@@ -21,11 +21,13 @@ module.exports = {
     "jest"
   ],
   "rules": {
+    "eol-last": ["error", "always"],
     "indent": ["error", 2],
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "warn",
     "jest/no-identical-title": "warn",
-    "jest/valid-expect": "warn"
+    "jest/valid-expect": "warn",
+    "semi": ["error", "always"]
   },
   "settings": {
     "react": {

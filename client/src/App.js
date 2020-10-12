@@ -5,8 +5,8 @@ import {
   Route
 } from "react-router-dom";
 
-import Lobby from './pages/Lobby'
-import MainMenu from './pages/MainMenu'
+import Lobby from './pages/Lobby';
+import MainMenu from './pages/MainMenu';
 import './App.css';
 
 const App = () => (

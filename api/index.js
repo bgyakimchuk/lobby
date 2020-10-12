@@ -1,10 +1,10 @@
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var port = 8000
+var port = 8000;
 
 app.get('/test', (req, res) => {
-  console.log('Test successful')
+  console.log('Test successful');
 });
 
 app.get('/', (req, res) => {
@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://localhost:${port}`);
 })
 
 // var numUsers = 0;

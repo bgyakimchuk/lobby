@@ -1,5 +1,5 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
 
 const MainMenu = () => {
   const makeTestRequest = () => {
@@ -9,15 +9,15 @@ const MainMenu = () => {
       })
       .catch((error) => {
         console.log(error);
-      })
-  }
+      });
+  };
 
   return (
     <div>
       <div>Main Menu</div>
       <button onClick={makeTestRequest}>Test Request</button>
     </div>
-  )
+  );
 };
 
 export default MainMenu;
