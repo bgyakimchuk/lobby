@@ -3,29 +3,42 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "eslint ./src --fix",
-    "eject": "react-scripts eject"
+    "build": "npm run clean && webpack --mode production",
+    "clean": "rimraf ./build",
+    "start": "webpack-dev-server",
+    "test": "jest",
+    "lint": "eslint ./src --fix"
   },
   "dependencies": {
+    "@babel/runtime": "7.11.2",
+    "axios": "^0.20.0",
+    "jest": "26.5.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
-    "axios": "^0.20.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
-  },
-  "devDependencies": {
+    "babel-eslint": "10.1.0",
+    "babel-jest": "^26.5.2",
+    "babel-loader": "8.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "css-loader": "4.3.0",
     "eslint": "^7.11.0",
-    "eslint-plugin-jest": "^24.1.0",
-    "eslint-plugin-react": "^7.21.4"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "eslint-plugin-react": "^7.21.4",
+    "file-loader": "6.1.1",
+    "html-webpack-plugin": "4.5.0",
+    "rimraf": "^3.0.2",
+    "style-loader": "2.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "3.11.0"
   },
   "browserslist": {
     "production": [
