@@ -3,20 +3,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import Lobby from './pages/Lobby';
 import MainMenu from './pages/MainMenu';
 import './App.css';
 
 const App = () => (
-  <div className="App">
-    <Router>
+  <div className='App'>
+    <Router basename='/'>
       <Switch>
-        <Route path="/lobby">
+        <Route path='/lobby'>
           <Lobby />
         </Route>
-        <Route path="/">
+        <Route path='/'>
           <MainMenu />
         </Route>
       </Switch>

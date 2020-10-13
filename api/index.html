@@ -13,42 +13,5 @@
       #messages li:nth-child(odd) { background: #eee; }
     </style>
   </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-      $(function () {
-        var socket = io();
-        const username = 'Barry'
-        socket.emit('add user', username);
-
-        $('form').submit((e) => {
-          e.preventDefault(); // prevents page reloading
-          const msg = $('#m').val();
-
-          $('#messages').append($('<li>').text(`${username}: ${msg}`));
-          socket.emit('new message', msg);
-          $('#m').val('');
-          return false;
-        });
-        socket.on('new message', function(data){
-          $('#messages').append($('<li>').text(`${data.username}: ${data.message}`));
-        });
-        socket.on('user joined', (data) => {
-          $('#messages').append($('<li>').text(
-            `${data.username} joined.`
-          ));
-        })
-        socket.on('user left', (data) => {
-          $('#messages').append($('<li>').text(
-            `${data.username} left.`
-          ));
-        })
-      });
-    </script>
-  </body>
+  <body></body>
 </html>

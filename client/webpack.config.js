@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = () => {
-  const isProd = false
+  const isProd = false;
 
   return {
     devtool: isProd ? 'none' : 'source-map',
@@ -12,8 +12,10 @@ module.exports = () => {
     output: {
       filename: isProd ? 'main.[hash].js' : 'main.js',
       path: path.resolve('./build'),
+      publicPath: '/'
     },
     devServer: {
+      historyApiFallback: true,
       compress: true,
       port: 3000
     },
@@ -22,7 +24,7 @@ module.exports = () => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
         {
           test: /\.css$/,

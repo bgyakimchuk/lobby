@@ -1,67 +1,51 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+var express = require('express');
+var app = express()
 var port = 8000;
-
-app.get('/test', (req, res) => {
-  console.log('Test successful');
+var server = app.listen(port);
+var io = require('socket.io')(server, {
+  path: '/lobby'
 });
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-})
+io.on('connection', (socket) => {
+  console.log("connection")
+  var addedUser = false;
 
-// var numUsers = 0;
+  socket.on('add user', (username) => {
+    if (addedUser) return;
 
-// io.on('connection', (socket) => {
-//   var addedUser = false;
+    console.log(`add user - ${username && username}`)
 
-//   socket.on('add user', (username) => {
-//     if (addedUser) return;
+    socket.username = username;
+    addedUser = true;
 
-//     console.log(`add user - ${username && username}`)
+    socket.emit('new user', {
+    });
 
-//     socket.username = username;
-//     numUsers += 1;
-//     addedUser = true;
+    socket.broadcast.emit(`user joined`, {
+      username: socket.username,
+    });
+  });
 
-//     socket.emit('new user', {
-//       numUsers: numUsers
-//     });
+  socket.on('new message', (message) => {
+    console.log(`new message - ${socket.username}: ${message}`)
 
-//     socket.broadcast.emit(`user joined`, {
-//       username: socket.username,
-//       numUsers: numUsers
-//     });
-//   });
+    socket.broadcast.emit('new message', {
+      username: socket.username,
+      message
+    });
+  });
 
-//   socket.on('new message', (message) => {
-//     console.log(`new message - ${socket.username}: ${message}`)
+  socket.on('disconnect', () => {
+    if (!addedUser) return;
 
-//     socket.broadcast.emit('new message', {
-//       username: socket.username,
-//       message
-//     });
-//   });
+    console.log(`disconnect - ${socket.username}`)
 
-//   socket.on('disconnect', () => {
-//     if (!addedUser) return;
-
-//     console.log(`disconnect - ${socket.username}`)
-
-//     numUsers -= 1;
-
-//     socket.broadcast.emit('user left', {
-//       username: socket.username,
-//       numUsers: numUsers
-//     });
-//   });
-// });
-
-// http.listen(3000, () => {
-//   io.emit('chat message', 'A user has disconnected.');
-// });
+    socket.broadcast.emit('user left', {
+      username: socket.username,
+    });
+  });
+});
